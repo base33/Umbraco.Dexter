@@ -1,0 +1,48 @@
+﻿{
+  "$schema": "./schema.json",
+  "alias": "products",
+  "content-types": [
+    {
+      "alias": "product",
+      "index-all-properties": true,
+      "properties": [
+        {
+          "alias": "category",
+          "index-strategy": "CsvToWhiteSpaceStrategy"
+        },
+        {
+          "alias": "productName",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "name",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "description",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "sku",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "price",
+          "exclude-field": true
+        },
+        {
+          "alias": "photos",
+          "exclude-field": true
+        },
+        {
+          "alias": "bodyText",
+          "exclude-field": true
+        }
+      ]
+    }
+  ]
+}

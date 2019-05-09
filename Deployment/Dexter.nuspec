@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+	<metadata>
+		<id>Umbraco.Dexter</id>
+		<version>1.0.0</version>
+		<title>Dexter</title>
+		<authors>Craig Noble</authors>
+		<owners>Craig Noble</owners>
+		<licenseUrl>http://www.github.com/</licenseUrl>
+		<projectUrl>http://www.github.com/</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Web site</description>
+		<releaseNotes>This is a release</releaseNotes>
+    <dependencies>
+      <dependency id="Dexter.Core" version="1.0.0" />
+      <dependency id="Dexter.IndexStrategies" version="1.0.0" />
+    </dependencies>
+  </metadata>
+	<files>
+		<file src="..\Dexter.Umbraco\config\dexter\dexter.config.json" target="config\dexter" />
+    <file src="..\Dexter.Umbraco\config\dexter\indexes\example.index.json" target="config\dexter\indexes" />
+    <file src="..\Dexter.Umbraco\config\dexter\indexes\schema.json" target="config\dexter\indexes" />
+    <file src="..\Dexter.Umbraco\config\dashboard.config.install.xdt" target="config" />
+    <file src="..\Dexter.Umbraco\config\dashboard.config.uninstall.xdt" target="config" />
+	</files>
+</package>

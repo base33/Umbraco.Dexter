@@ -1,0 +1,74 @@
+﻿{
+  "$schema": "./schema.json",
+  "alias": "all",
+  "content-types": [
+    {
+      "alias": "contentPage",
+      "index-all-properties": true,
+      "properties": [
+        {
+          "alias": "keywords",
+          "index-strategy": "CsvToWhiteSpaceStrategy"
+        }
+      ]
+    },
+    {
+      "alias": "person",
+      "index-all-properties": true
+    },
+    {
+      "alias": "product",
+      "index-all-properties": true,
+      "properties": [
+        {
+          "alias": "category",
+          "index-strategy": "CsvToWhiteSpaceStrategy"
+        },
+        {
+          "alias": "productName",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "name",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "description",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "sku",
+          "group": "content",
+          "exclude-field": true
+        },
+        {
+          "alias": "price",
+          "exclude-field": true
+        },
+        {
+          "alias": "photos",
+          "exclude-field": true
+        },
+        {
+          "alias": "bodyText",
+          "exclude-field": true
+        }
+      ]
+    }
+  ],
+  "media-types": [
+    {
+      "alias": "File",
+      "index-all-properties": false,
+      "properties": [
+        {
+          "alias": "umbracoFile",
+          "index-strategy": "PDFToTextStrategy"
+        }
+      ]
+    }
+  ]
+}

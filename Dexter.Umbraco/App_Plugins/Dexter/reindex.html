@@ -1,0 +1,54 @@
+﻿<div class="dexter-reindex" ng-controller="dexter.reindex">
+    <div class="umb-healthcheck-group__details-group-title">
+        <div class="umb-healthcheck-group__details-group-name">Indexes</div>
+    </div>
+    <div class="umb-healthcheck-group__details-checks">
+        <div class="umb-healthcheck-group__details-check">
+            <div class="umb-healthcheck-group__details-check-title">
+                <div class="umb-healthcheck-group__details-check-name">View Dexter Indexes</div>
+                <div class="umb-healthcheck-group__details-check-description">Allows you to view the details of each index and provides some tools for managing the indexes</div>
+            </div>
+
+            <div class="umb-healthcheck-group__details-status ng-scope" ng-repeat="index in indexes">
+
+                <div class="umb-healthcheck-group__details-status-icon-container">
+                    <i class="umb-healthcheck-status-icon icon-check color-green icon-check color-green"></i>
+                </div>
+
+                <div class="umb-healthcheck-group__details-status-content">
+                    <div class="umb-healthcheck-group__details-status-text">
+                        <div ng-click="index.showProperties = !index.showProperties">
+                            {{index.Name}}
+                        </div>
+                    </div>
+
+                    <div class="umb-healthcheck-group__details-status-actions" ng-show="index.showProperties" style="position: relative;">
+                        <table class="table table-bordered table-condensed">
+                            <caption>&nbsp;</caption>
+                            <tbody>
+                                <tr>
+                                    <th>Documents in index</th>
+                                    <td>{{index.DocumentsIndexed}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <div class="umb-healthcheck-group__details-status-action">
+                                <button type="button" class="umb-era-button -blue" ng-click="reindex(index)">Rebuild index</button>
+                                <div ng-show="index.isProcessing">
+                                    <div class="umb-healthcheck-group__details-status-overlay"></div>
+                                    <ul class="umb-load-indicator animated -half-second">
+                                        <li class="umb-load-indicator__bubble"></li>
+                                        <li class="umb-load-indicator__bubble"></li>
+                                        <li class="umb-load-indicator__bubble"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

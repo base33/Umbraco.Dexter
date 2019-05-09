@@ -1,0 +1,51 @@
+﻿{
+  /*******
+  * This allows you to swap out indexer.  Built in the core is Azure Search and Elastic Search Indexers.
+  * Note: Must implement Dexter.Core.Interfaces.IIndexer
+  * Out of the box indexers:
+  * - Elastic Search Indexer: Dexter.Core, Dexter.Core.Indexer.ElasticIndexer (settings > uri)
+  * - Azure Search Indexer: Dexter.Core, Dexter.Core.Indexer.AzureSearchIndexer (settings > service-name/api-key
+  *******/
+  "indexer": {
+    "type": {
+      "assembly": "Dexter.ElasticSearch",
+      "type": "Dexter.ElasticSearch.ElasticIndexer"
+    },
+    "settings": {
+      "uri": "search-elastic-search-test-k52xmx3wtbzybjawjc74augu3i.eu-west-1.es.amazonaws.com"
+    }
+  },
+
+  /*******
+  * This allows you to set up index strategies to clean up and process data prior to being indexed
+  *******/
+  "content-index-strategies": [
+    {
+      "alias": "HideFromIndex",
+      "assembly": "Dexter.IndexStrategies",
+      "type": "Dexter.IndexStrategies.Content.HideFromIndexStrategy"
+    }
+  ],
+
+  /*******
+  * This allows you to set up field-based index strategies to clean up and process data before being indexed
+  *******/
+  "field-index-strategies": [
+    {
+      "alias": "CsvToWhiteSpaceStrategy",
+      "assembly": "Dexter.IndexStrategies",
+      "type": "Dexter.IndexStrategies.Property.CsvToWhiteSpaceStrategy"
+    },
+    {
+      "alias": "PDFToTextStrategy",
+      "assembly": "Dexter.IndexStrategies",
+      "type": "Dexter.IndexStrategies.Property.PDFToTextStrategy"
+    }
+  ],
+
+  /*******
+  * Define what index configs to enable.
+  * A config for each index must exist for each index within config/dexter/indexes/{index}.index.json
+  *******/
+  "indexes": [ "all", "products", "people", "files" ]
+}

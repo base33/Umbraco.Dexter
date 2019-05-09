@@ -1,0 +1,17 @@
+﻿{
+  "$schema": "./schema.json",
+  "alias": "files",
+  "index-strategies": ["HideFromIndex"],
+  "media-types": [
+    {
+      "alias": "File",
+      "index-all-properties": false,
+      "properties": [
+        {
+          "alias": "umbracoFile",
+          "index-strategy": "PDFToTextStrategy"
+        }
+      ]
+    }
+  ]
+}

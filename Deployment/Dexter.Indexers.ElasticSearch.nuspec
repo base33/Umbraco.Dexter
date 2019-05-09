@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Umbraco.Dexter.ElasticSearch</id>
+    <version>1.0.0</version>
+    <title>Dexter</title>
+    <authors>Craig Noble</authors>
+    <owners>Craig Noble</owners>
+    <licenseUrl>http://www.github.com/</licenseUrl>
+    <projectUrl>http://www.github.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Web site</description>
+    <releaseNotes>This is a release</releaseNotes>
+    <dependencies>
+      <dependency id="Dexter.Core" version="1.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Dexter.Umbraco\bin\dexter.elasticsearch.dll" target="lib" />
+  </files>
+</package>

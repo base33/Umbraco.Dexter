@@ -1,0 +1,10 @@
+﻿{
+  "$schema": "./schema.json",
+  "alias": "people",
+  "content-types": [
+    {
+      "alias": "person",
+      "index-all-properties": true
+    }
+  ]
+}

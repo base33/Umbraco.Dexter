@@ -1,0 +1,29 @@
+﻿{
+  "$schema": "./schema.json",
+  "alias": "example",
+  "index-strategies": ["HideFromIndex"],
+  "content-types": [
+    {
+      "alias": "contentPage",
+      "index-all-properties": true,
+      "properties": [
+        {
+          "alias": "keywords",
+          "index-strategy": "CsvToWhiteSpaceStrategy"
+        }
+      ]
+    }
+  ],
+  "media-types": [
+    {
+      "alias": "File",
+      "index-all-properties": false,
+      "properties": [
+        {
+          "alias": "umbracoFile",
+          "index-strategy": "PDFToTextStrategy"
+        }
+      ]
+    }
+  ]
+}
