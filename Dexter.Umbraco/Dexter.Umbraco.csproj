@@ -358,6 +358,8 @@
     <Content Include="config\Dashboard.config.uninstall.xdt" />
     <None Include="config\Dashboard.config.install.xdt" />
     <Content Include="config\dexter\indexes\example.index.json" />
+    <Content Include="config\dexter\indexes\everything.index.json" />
+    <Content Include="config\dexter\indexes\base-properties.index.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

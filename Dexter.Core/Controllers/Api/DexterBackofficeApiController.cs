@@ -59,7 +59,10 @@ namespace Dexter.Core.Controllers.Api
                 var contents = Services.ContentService.GetContentOfContentType(contentTypeId).Where(c => c.Published);
 
                 if (string.IsNullOrWhiteSpace(contentType.Alias))
-                    contents = GetNodesByContentTypes(contentTypes.Select(x => x.Id));
+                    contents = GetNodesByContentTypes(
+                        contentTypes.Except(
+                                contentTypes.Where(ct => config.ContentTypes.Select(c => c.Alias).Contains(ct.Alias))
+                            ).Select(x => x.Id));
 
                 foreach (var content in contents)
                 {
@@ -114,8 +117,8 @@ namespace Dexter.Core.Controllers.Api
             var contentNodes = new List<IContent>();
             foreach (var id in contentTypes)
             {
-                var test = Services.ContentService.GetContentOfContentType(id).Where(c => c.Published);
-                contentNodes.AddRange(test);
+                var nodes = Services.ContentService.GetContentOfContentType(id).Where(c => c.Published);
+                contentNodes.AddRange(nodes);
             }
             return contentNodes;
         }
