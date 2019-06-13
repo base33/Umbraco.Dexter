@@ -12,6 +12,7 @@ using Umbraco.Web;
 using Umbraco.Web.WebApi;
 using Umbraco.Core.Services;
 using Dexter.Core.Models.Config;
+using Umbraco.Core.Models;
 
 namespace Dexter.Core.Controllers.Api
 {
@@ -52,10 +53,13 @@ namespace Dexter.Core.Controllers.Api
             {
                 var contentTypeId = contentTypes?.FirstOrDefault(c => c.Alias == contentType.Alias)?.Id ?? 0;
 
-                if (contentTypeId == 0)
+                if (!string.IsNullOrWhiteSpace(contentType.Alias) && contentTypeId == 0)
                     continue;
 
                 var contents = Services.ContentService.GetContentOfContentType(contentTypeId).Where(c => c.Published);
+
+                if (string.IsNullOrWhiteSpace(contentType.Alias))
+                    contents = GetNodesByContentTypes(contentTypes.Select(x => x.Id));
 
                 foreach (var content in contents)
                 {
@@ -103,6 +107,17 @@ namespace Dexter.Core.Controllers.Api
             }
 
             return indexes;
-        } 
+        }
+
+        private IEnumerable<IContent> GetNodesByContentTypes(IEnumerable<int> contentTypes)
+        {
+            var contentNodes = new List<IContent>();
+            foreach (var id in contentTypes)
+            {
+                var test = Services.ContentService.GetContentOfContentType(id).Where(c => c.Published);
+                contentNodes.AddRange(test);
+            }
+            return contentNodes;
+        }
     }
 }

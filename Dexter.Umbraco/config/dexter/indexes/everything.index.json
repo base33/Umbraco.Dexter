@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "./schema.json",
+  "alias": "everything",
+  "content-types": [
+    {
+      "index-all-properties": true
+    }
+  ]
+}
