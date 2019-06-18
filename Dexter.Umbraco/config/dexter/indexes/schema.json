@@ -53,7 +53,6 @@
           "description": "Aliases of the content index strategy"
         }
       },
-      "required": [ "alias" ],
       "type": "object"
     },
 

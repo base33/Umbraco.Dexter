@@ -1,0 +1,37 @@
+﻿{
+    "$schema": "./schema.json",
+    "alias": "base-properties",
+    "content-types": [
+        {
+            "properties": [
+                {
+                    "alias": "seoMetaDescription"
+                },
+                {
+                    "alias": "keywords",
+                    "index-strategy": "CsvToWhiteSpaceStrategy"
+                }
+            ]
+        },
+        {
+            "alias": "blogpost",
+            "properties": [
+                {
+                    "alias": "categories",
+                    "index-strategy": "CsvToWhiteSpaceStrategy"
+                }
+            ]
+        },
+        {
+            "alias": "home",
+            "properties": [
+                {
+                    "alias": "heroHeader"
+                },
+                {
+                    "alias": "heroDescription"
+                }
+            ]
+        }
+    ]
+}

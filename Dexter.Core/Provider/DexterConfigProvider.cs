@@ -37,6 +37,15 @@ namespace Dexter.Core.Provider
 
             indexConfig = FileSystemService.MapFile($"{DEFAULTINDEXFILEPATH}{alias}.index.json").ReadAsJson<Index>();
 
+            var indexAllContentType = indexConfig.ContentTypes.FirstOrDefault(x => string.IsNullOrWhiteSpace(x.Alias));
+
+            if(indexAllContentType != null)
+            { 
+                foreach(var type in indexConfig.ContentTypes.Where(x => !string.IsNullOrWhiteSpace(x.Alias)))
+                {
+                    type.Properties.AddRange(indexAllContentType.Properties);
+                }
+            }
             CacheProvider.Set(cacheName, indexConfig);
 
             return indexConfig;

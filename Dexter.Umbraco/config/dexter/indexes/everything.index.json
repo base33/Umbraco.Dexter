@@ -1,0 +1,13 @@
+﻿/*******
+  * WARNING: This is considered dangerous to use. It could potentially index site settings and other sensitive data.
+  * It's recommended to build your own index strategy so this data isn't indexed.
+  *******/
+{
+    "$schema": "./schema.json",
+    "alias": "everything",
+    "content-types": [
+        {
+            "index-all-properties": true
+        }
+    ]
+}

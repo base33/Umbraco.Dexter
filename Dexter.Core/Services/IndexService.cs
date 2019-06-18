@@ -49,7 +49,11 @@ namespace Dexter.Core.Services
                     : indexConfig.MediaTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias);
 
                 if (contentTypeConfig == null)
-                    continue;
+                {
+                    contentTypeConfig = indexConfig.ContentTypes.FirstOrDefault(c => string.IsNullOrWhiteSpace(c.Alias));
+                    if (contentTypeConfig == null)
+                        continue;
+                }
 
                 var indexableItem = GetIndexableItem(indexConfig, contentTypeConfig, content);
 
