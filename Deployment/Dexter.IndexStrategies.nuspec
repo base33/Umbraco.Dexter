@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
-    <id>Umbraco.Dexter.IndexStrategies</id>
+    <id>Our.Umbraco.Dexter.IndexStrategies</id>
     <version>1.0.0</version>
     <title>Umbraco.Dexter</title>
     <authors>Craig Noble</authors>
@@ -12,7 +12,7 @@
     <description>Web site</description>
     <releaseNotes>This is a release</releaseNotes>
     <dependencies>
-      <dependency id="Dexter.Core" version="1.0.0" />
+      <dependency id="Our.Umbraco.Dexter.Core" version="(,2.0)" />
     </dependencies>
   </metadata>
   <files>
