@@ -30,19 +30,24 @@ namespace Dexter.Core.Controllers.Api
         public void Reindex(string index)
         {
             var config = ConfigProvider.GetIndexConfig(index);
-            
+
+            if (config.Alias.Contains("_"))
+            {
+                config.Alias = config.Alias.Substring(index.IndexOf("_") + 1);
+            }
+
             var indexService = new IndexService(ConfigProvider);
 
             indexService.ClearIndex(index);
 
             if(config.ContentTypes.Count > 0)
             {
-                ReindexContent(config, indexService, index);
+                ReindexContent(config, indexService, config.Alias);
             }
 
             if (config.MediaTypes.Count > 0)
             {
-                ReindexMedia(config, indexService, index);
+                ReindexMedia(config, indexService, config.Alias);
             }
         }
 
