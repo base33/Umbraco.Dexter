@@ -31,23 +31,18 @@ namespace Dexter.Core.Controllers.Api
         {
             var config = ConfigProvider.GetIndexConfig(index);
 
-            if (config.Alias.Contains("_"))
-            {
-                config.Alias = config.Alias.Substring(index.IndexOf("_") + 1);
-            }
-
             var indexService = new IndexService(ConfigProvider);
 
             indexService.ClearIndex(index);
 
             if(config.ContentTypes.Count > 0)
             {
-                ReindexContent(config, indexService, config.Alias);
+                ReindexContent(config, indexService, index);
             }
 
             if (config.MediaTypes.Count > 0)
             {
-                ReindexMedia(config, indexService, config.Alias);
+                ReindexMedia(config, indexService, index);
             }
         }
 
@@ -108,9 +103,11 @@ namespace Dexter.Core.Controllers.Api
                 if (indexName != "" && name != indexName)
                     continue;
 
+                var indexConfig = ConfigProvider.GetIndexConfig(name);
+
                 var index = new Models.Backoffice.Index();
                 index.Name = name;
-                index.DocumentsIndexed = indexer.GetNumberOfDocumentsStored(name);
+                index.DocumentsIndexed = indexer.GetNumberOfDocumentsStored(indexConfig.Alias);
                 indexes.Add(index);
             }
 
