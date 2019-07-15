@@ -1,5 +1,6 @@
 ﻿using Dexter.Core.Interfaces;
 using Dexter.Core.Models.Config;
+using Dexter.Core.Resolvers;
 using Dexter.Core.Services;
 using Newtonsoft.Json;
 using System;
@@ -46,6 +47,9 @@ namespace Dexter.Core.Provider
                     type.Properties.AddRange(indexAllContentType.Properties);
                 }
             }
+
+            indexConfig.Alias = IndexResolver.GetIndexName(alias);
+
             CacheProvider.Set(cacheName, indexConfig);
 
             return indexConfig;

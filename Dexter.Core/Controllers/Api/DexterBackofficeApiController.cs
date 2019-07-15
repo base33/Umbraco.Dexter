@@ -30,7 +30,7 @@ namespace Dexter.Core.Controllers.Api
         public void Reindex(string index)
         {
             var config = ConfigProvider.GetIndexConfig(index);
-            
+
             var indexService = new IndexService(ConfigProvider);
 
             indexService.ClearIndex(index);
@@ -103,9 +103,11 @@ namespace Dexter.Core.Controllers.Api
                 if (indexName != "" && name != indexName)
                     continue;
 
+                var indexConfig = ConfigProvider.GetIndexConfig(name);
+
                 var index = new Models.Backoffice.Index();
                 index.Name = name;
-                index.DocumentsIndexed = indexer.GetNumberOfDocumentsStored(name);
+                index.DocumentsIndexed = indexer.GetNumberOfDocumentsStored(indexConfig.Alias);
                 indexes.Add(index);
             }
 
