@@ -33,7 +33,7 @@ namespace Dexter.Core.Controllers.Api
 
             var indexService = new IndexService(ConfigProvider);
 
-            indexService.ClearIndex(index);
+            indexService.ClearIndex(config.Alias);
 
             if(config.ContentTypes.Count > 0)
             {
