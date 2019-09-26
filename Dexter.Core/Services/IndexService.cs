@@ -95,7 +95,8 @@ namespace Dexter.Core.Services
             
             foreach(var indexAlias in config.Indexes)
             {
-                indexer.Remove(indexAlias, content.GetContentType().Alias, content.Id);
+                var indexConfig = ConfigProvider.GetIndexConfig(indexAlias);
+                indexer.Remove(indexConfig.Alias, content.GetContentType().Alias, content.Id);
             }
         }
 
