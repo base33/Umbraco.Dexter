@@ -1,0 +1,10 @@
+﻿{
+  "$schema": "./schema.json",
+  "alias": "peopleproducts",
+  "content-types": [
+    {
+      "aliases": [ "person", "product" ],
+      "index-all-properties": true
+    }
+  ]
+}

@@ -33,9 +33,20 @@
   "definitions": {
     "content-type": {
       "properties": {
+        "$ref": {
+          "type": "string",
+          "description": "Path to content type specification"
+        },
         "alias": {
           "type": "string",
           "description": "Alias of the property"
+        },
+        "aliases": {
+          "type": "array",
+          "description": "Alias of the property",
+          "items": {
+            "type": "string"
+          }
         },
         "index-all-properties": {
           "type": "boolean",

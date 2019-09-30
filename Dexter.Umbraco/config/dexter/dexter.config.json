@@ -47,5 +47,5 @@
   * Define what index configs to enable.
   * A config for each index must exist for each index within config/dexter/indexes/{index}.index.json
   *******/
-  "indexes": [ "all", "products", "people", "files", "everything", "base-properties" ]
+  "indexes": [ "all", "products", "people", "peopleproducts", "files", "everything", "base-properties" ]
 }

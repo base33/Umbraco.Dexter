@@ -45,8 +45,8 @@ namespace Dexter.Core.Services
                 var indexConfig = ConfigProvider.GetIndexConfig(indexAlias);
 
                 var contentTypeConfig = source == Source.Content
-                    ? indexConfig.ContentTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias)
-                    : indexConfig.MediaTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias);
+                    ? indexConfig.ContentTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias || c.Aliases.Contains(content.GetContentType().Alias))
+                    : indexConfig.MediaTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias || c.Aliases.Contains(content.GetContentType().Alias));
 
                 if (contentTypeConfig == null)
                 {
