@@ -3,7 +3,7 @@
   "alias": "products",
   "content-types": [
     {
-      "$ref": "base-properties.index.json#"
+      "$ref": "types/product.json#"
     }
   ]
 }
