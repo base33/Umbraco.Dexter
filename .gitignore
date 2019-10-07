@@ -20,11 +20,11 @@
 *.udt
 
 #Deployment/
-/Sources/packages/
 uSync.Archive/
 media/
 App_Data/
 NuGetBackup/
+Dexter.Umbraco/App_Data/
 
 packages/
 !packages/repositories.config
