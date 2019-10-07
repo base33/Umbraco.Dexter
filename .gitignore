@@ -1,8 +1,31 @@
-bin/
-obj/
+# git merge files
+*.orig
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+
+# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+[Oo]bj/
+[Bb]in/
+[Dd]ebug/
+[Bb]uild/
+[Rr]elease/
+
+# User-specific files
+*.suo
+*.user
+*.cache
+*.orig
+*.udt
+
+#Deployment/
+/Sources/packages/
+uSync.Archive/
+media/
+App_Data/
+NuGetBackup/
+
 packages/
 !packages/repositories.config
 .vs/
-
-*.user
-*.suo
