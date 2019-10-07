@@ -27,7 +27,7 @@ namespace Dexter.IndexStrategies.Property
 
             switch(System.IO.Path.GetExtension(filePath))
             {
-                case "pdf":
+                case ".pdf":
                     text = ConvertPDFToText(bytes);
                     break;
             }
