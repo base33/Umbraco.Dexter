@@ -66,7 +66,7 @@
       "properties": [
         {
           "alias": "umbracoFile",
-          "index-strategy": "PDFToTextStrategy"
+          "index-strategy": "FileToTextStrategy"
         }
       ]
     }

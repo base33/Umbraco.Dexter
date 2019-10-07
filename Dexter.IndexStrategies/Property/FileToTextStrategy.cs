@@ -1,6 +1,8 @@
 ﻿using Dexter.Core.Interfaces;
 using Dexter.Core.Models.Config;
 using Dexter.Core.Models.IndexStrategy;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System;
@@ -29,6 +31,10 @@ namespace Dexter.IndexStrategies.Property
             {
                 case ".pdf":
                     text = ConvertPDFToText(bytes);
+                    break;
+                case ".doc":
+                case ".docx":
+                    text = ConvertWordToText(filePath);
                     break;
             }
 
@@ -69,6 +75,26 @@ namespace Dexter.IndexStrategies.Property
                 for (var currentPageIndex = 1; currentPageIndex <= numberOfPages; currentPageIndex++)
                 {
                     sb.Append(PdfTextExtractor.GetTextFromPage(reader, currentPageIndex));
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+
+            return sb.ToString();
+        }
+
+        private static string ConvertWordToText(string filePath)
+        {
+            var sb = new StringBuilder();
+
+            try
+            {
+                using (WordprocessingDocument wordDocument = WordprocessingDocument.Open(filePath, false))
+                {
+                    Body body = wordDocument.MainDocumentPart.Document.Body;
+                    sb.Append(body.InnerText);
                 }
             }
             catch (Exception exception)
