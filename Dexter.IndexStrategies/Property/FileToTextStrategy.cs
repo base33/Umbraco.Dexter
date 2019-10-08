@@ -26,6 +26,7 @@
                     break;
                 case ".doc":
                 case ".xls":
+                    text = new XlsToTextConverter().Convert(filePath);
                     break;
                 case ".docx":
                     text = new DocxToTextConverter().Convert(filePath);
