@@ -37,9 +37,9 @@
       "type": "Dexter.IndexStrategies.Property.CsvToWhiteSpaceStrategy"
     },
     {
-      "alias": "PDFToTextStrategy",
+      "alias": "FileToTextStrategy",
       "assembly": "Dexter.IndexStrategies",
-      "type": "Dexter.IndexStrategies.Property.PDFToTextStrategy"
+      "type": "Dexter.IndexStrategies.Property.FileToTextStrategy"
     }
   ],
 
