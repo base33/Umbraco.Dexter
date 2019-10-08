@@ -71,20 +71,27 @@
                     foreach (DataColumn column in dt.Columns)
                     {
                         sb.Append(column.Caption);
-                        sb.Append("; ");
+                        sb.Append(' ');
                     }
+                    sb.Append("; ");
                 }
 
                 if (dt.Rows.Count > 0)
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        if(row.ItemArray != null && row.ItemArray.Length > 0)
-                        foreach(var item in row.ItemArray)
+                        if (row.ItemArray != null && row.ItemArray.Length > 0)
                         {
-                                sb.Append(item.ToString());
-                                sb.Append("; ");
+                            foreach (var item in row.ItemArray)
+                            {
+                                if (!string.IsNullOrWhiteSpace(item.ToString()))
+                                {
+                                    sb.Append(item.ToString());
+                                    sb.Append(' ');
+                                }
                             }
+                            sb.Append("; ");
+                        }
                     }
                 }
             }
