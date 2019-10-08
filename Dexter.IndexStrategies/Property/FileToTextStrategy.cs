@@ -25,6 +25,8 @@
                     text = new PdfToTextConverter().Convert(filePath);
                     break;
                 case ".doc":
+                    text = new DocToTextConverter().Convert(filePath);
+                    break;
                 case ".xls":
                     text = new XlsToTextConverter().Convert(filePath);
                     break;
