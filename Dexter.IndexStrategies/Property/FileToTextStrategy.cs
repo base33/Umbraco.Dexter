@@ -37,6 +37,9 @@ namespace Dexter.IndexStrategies.Property
                 case ".docx":
                     text = new DocxToTextConverter().Convert(filePath);
                     break;
+                case ".xlsx":
+                    text = new XlsxToTextConverter().Convert(filePath);
+                    break;
             }
 
             e.Value = string.Join(" ", text.Split(new[] { ' ' }).Except(IGNORE));

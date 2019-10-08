@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content\HideFromIndexStrategy.cs" />
+    <Compile Include="Converters\XlsxToTextConverter.cs" />
     <Compile Include="Converters\DocxToTextConverter.cs" />
     <Compile Include="Converters\IPropertyConverter.cs" />
     <Compile Include="Converters\PdfToTextConverter.cs" />
