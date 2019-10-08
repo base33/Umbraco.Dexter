@@ -33,6 +33,7 @@ namespace Dexter.IndexStrategies.Property
                     text = new PdfToTextConverter().Convert(filePath);
                     break;
                 case ".doc":
+                case ".xls":
                     break;
                 case ".docx":
                     text = new DocxToTextConverter().Convert(filePath);
