@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content\HideFromIndexStrategy.cs" />
+    <Compile Include="Converters\DocxToTextConverter.cs" />
+    <Compile Include="Converters\IPropertyConverter.cs" />
+    <Compile Include="Converters\PdfToTextConverter.cs" />
     <Compile Include="Property\CsvToWhiteSpaceStrategy.cs" />
     <Compile Include="Property\FileToTextStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
