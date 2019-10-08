@@ -1,5 +1,6 @@
 ﻿namespace Dexter.IndexStrategies.Converters
 {
+    using Spire.Doc;
     using System;
     using System.Text;
 
@@ -11,7 +12,9 @@
 
             try
             {
-                
+                Document document = new Document();
+                document.LoadFromFile(filePath);
+                sb.Append(document.GetText());
             }
             catch (Exception exception)
             {
