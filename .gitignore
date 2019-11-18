@@ -29,3 +29,4 @@ Dexter.Umbraco/App_Data/
 packages/
 !packages/repositories.config
 .vs/
+/Dexter.Umbraco/App_Data/TEMP/

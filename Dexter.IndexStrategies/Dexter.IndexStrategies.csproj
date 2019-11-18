@@ -43,7 +43,14 @@
       <HintPath>..\packages\FreeSpire.Doc.7.1.13\lib\net46\Spire.License.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
     </Reference>
@@ -64,11 +71,13 @@
   <ItemGroup>
     <Compile Include="Content\HideFromIndexStrategy.cs" />
     <Compile Include="Converters\DocToTextConverter.cs" />
+    <Compile Include="Converters\PptxToTextConverter.cs" />
     <Compile Include="Converters\XlsToTextConverter.cs" />
     <Compile Include="Converters\XlsxToTextConverter.cs" />
     <Compile Include="Converters\DocxToTextConverter.cs" />
     <Compile Include="Converters\IPropertyConverter.cs" />
     <Compile Include="Converters\PdfToTextConverter.cs" />
+    <Compile Include="Converters\ZipToTextConverter.cs" />
     <Compile Include="Property\CsvToWhiteSpaceStrategy.cs" />
     <Compile Include="Property\FileToTextStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
