@@ -360,6 +360,9 @@
     <Content Include="config\dexter\indexes\example.index.json" />
     <Content Include="config\dexter\indexes\everything.index.json" />
     <Content Include="config\dexter\indexes\base-properties.index.json" />
+    <Content Include="config\dexter\indexes\types\product.json" />
+    <Content Include="config\dexter\indexes\types\schema.json" />
+    <Content Include="config\dexter\indexes\peopleproducts.index.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -28,10 +28,10 @@ namespace Dexter.Core.Models.FileSystem
             return System.IO.File.ReadAllText(File.FullName);
         }
 
-        public T ReadAsJson<T>()
+        public T ReadAsJson<T>(params JsonConverter[] jsonConverters)
         {
             var json = ReadAllText();
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonConvert.DeserializeObject<T>(json, converters : jsonConverters);
         }
     }
 }

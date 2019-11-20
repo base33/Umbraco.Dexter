@@ -1,0 +1,58 @@
+﻿{
+  "title": "",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "type": "object",
+
+  "properties": {
+    "alias": {
+      "type": "string",
+      "description": "Alias of the property"
+    },
+    "index-all-properties": {
+      "type": "boolean",
+      "description": "Whether to index all properties"
+    },
+    "properties": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/content-type-property" }
+    },
+    "index-strategies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Aliases of the content index strategy"
+    }
+  },
+
+  "required": [ "alias" ],
+
+  "definitions": {
+    "content-type-property": {
+      "alias": {
+        "type": "string",
+        "description": "Alias of the property"
+      },
+      "aliases": {
+        "type": "array",
+        "description": "Alias of the property",
+        "items": {
+          "type": "string"
+        }
+      },
+      "exclude-field": {
+        "type": "boolean",
+        "description": "Whether to exclude the field from index"
+      },
+      "group": {
+        "type": "string",
+        "description": "Alias of the group"
+      },
+      "index-strategy": {
+        "type": "string",
+        "description": "Alias of the field index strategy"
+      }
+    }
+  }
+}
