@@ -3,6 +3,7 @@
     using DocumentFormat.OpenXml.Packaging;
     using System;
     using System.Text;
+    using A = DocumentFormat.OpenXml.Wordprocessing;
 
     public class DocxToTextConverter : IPropertyConverter<string, string>
     {
@@ -15,7 +16,26 @@
                 using (WordprocessingDocument wordDocument = WordprocessingDocument.Open(filePath, false))
                 {
                     var body = wordDocument.MainDocumentPart.Document.Body;
-                    sb.Append(body.InnerText);
+
+                    if (!body.HasChildren) { return string.Empty; }
+
+                    foreach (var child in body.ChildElements)
+                    {
+                        if (child is A.Table)
+                        {
+                            var tableContent = child.Descendants<A.Text>();
+                            foreach (var cell in tableContent)
+                            {
+                                sb.Append(cell.InnerText);
+                                sb.Append(" ");
+                            }
+                        }
+                        else
+                        {
+                            sb.Append(child.InnerText);
+                        }
+                        sb.Append(" ");
+                    }
                 }
             }
             catch (Exception exception)

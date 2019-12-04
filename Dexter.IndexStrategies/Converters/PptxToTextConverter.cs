@@ -62,6 +62,7 @@
                 foreach (A.Text text in texts)
                 {
                     sb.Append(text.Text);
+                    sb.Append(" ");
                 }
             }
         }

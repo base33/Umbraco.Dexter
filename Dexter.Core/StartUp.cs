@@ -26,6 +26,7 @@ namespace Dexter.Core
 
             Umbraco.Core.Services.MediaService.Saved += MediaService_Saved;
             Umbraco.Core.Services.MediaService.Deleted += MediaService_Deleted;
+            Umbraco.Core.Services.MediaService.Trashed += MediaService_Trashed;
         }
 
         // ADD!
@@ -87,6 +88,18 @@ namespace Dexter.Core
             foreach (var entity in e.DeletedEntities)
             {
                 indexService.Remove(entity);
+            }
+        }
+
+        private void MediaService_Trashed(Umbraco.Core.Services.IMediaService sender, Umbraco.Core.Events.MoveEventArgs<Umbraco.Core.Models.IMedia> e)
+        {
+            var fileSystemService = new FileSystemService(new DirectoryInfo(HttpRuntime.AppDomainAppPath));
+            var configProvider = new DexterConfigProvider(fileSystemService);
+            var indexService = new IndexService(configProvider);
+
+            foreach (var entity in e.MoveInfoCollection)
+            {
+                indexService.Remove(entity.Entity);
             }
         }
     }
