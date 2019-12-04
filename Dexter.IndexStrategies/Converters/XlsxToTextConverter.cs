@@ -89,7 +89,7 @@
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     sb.Append(value);
-                    sb.Append("; ");
+                    sb.Append(" ");
                 }
             }
         }
