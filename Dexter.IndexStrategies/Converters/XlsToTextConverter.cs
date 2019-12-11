@@ -90,7 +90,7 @@
                                     sb.Append(' ');
                                 }
                             }
-                            sb.Append("; ");
+                            sb.Append(" ");
                         }
                     }
                 }
