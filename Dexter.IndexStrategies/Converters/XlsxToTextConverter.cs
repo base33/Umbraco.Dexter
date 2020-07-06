@@ -15,7 +15,10 @@
 
             try
             {
-                this.GetWorkbookText(filePath, sb);
+                using (SpreadsheetDocument document = SpreadsheetDocument.Open(filePath, false))
+                {
+                    this.GetWorkbookText(document, sb);
+                }
             }
             catch (Exception exception)
             {
@@ -25,21 +28,18 @@
             return sb.ToString();
         }
 
-        private void GetWorkbookText(string filePath, StringBuilder sb)
+        public void GetWorkbookText(SpreadsheetDocument document, StringBuilder sb)
         {
-            using (SpreadsheetDocument document = SpreadsheetDocument.Open(filePath, false))
+            WorkbookPart wbPart = document.WorkbookPart;
+            var docSheets = wbPart.Workbook.Descendants<Sheet>();
+
+            foreach (var currentSheet in docSheets)
             {
-                WorkbookPart wbPart = document.WorkbookPart;
-                var docSheets = wbPart.Workbook.Descendants<Sheet>();
+                WorksheetPart wsPart = (WorksheetPart)(wbPart.GetPartById(currentSheet.Id));
 
-                foreach(var currentSheet in docSheets)
-                {
-                    WorksheetPart wsPart = (WorksheetPart)(wbPart.GetPartById(currentSheet.Id));
+                var cells = wsPart.Worksheet.Descendants<Cell>();
 
-                    var cells = wsPart.Worksheet.Descendants<Cell>();
-
-                    this.GetCellsText(wbPart, cells, sb);
-                }
+                this.GetCellsText(wbPart, cells, sb);
             }
         }
 
@@ -89,7 +89,7 @@
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     sb.Append(value);
-                    sb.Append("; ");
+                    sb.Append(" ");
                 }
             }
         }

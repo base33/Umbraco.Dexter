@@ -1,14 +1,10 @@
 ﻿namespace Dexter.IndexStrategies.Property
 {
     using Dexter.Core.Interfaces;
-    using Dexter.Core.Models.Config;
     using Dexter.Core.Models.IndexStrategy;
     using Dexter.IndexStrategies.Converters;
+    using System.Configuration;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Web;
-    using Umbraco.Core;
 
     public class FileToTextStrategy : IPropertyIndexStrategy
     {
@@ -16,7 +12,13 @@
 
         public void Execute(IndexFieldEvent e)
         {
-            var filePath = HttpContext.Current.Server.MapPath(e.UmbracoProperty.Value.ToString());
+            var umbracoFileName = e.UmbracoProperty.Value != null ? e.UmbracoProperty.Value.ToString() : string.Empty;
+            var docPath = ConfigurationManager.AppSettings["Dexter:DocumentPath"];
+            var filePath = string.IsNullOrWhiteSpace(docPath) 
+                ? umbracoFileName 
+                : umbracoFileName.Replace("~/media", ConfigurationManager.AppSettings["Dexter:DocumentPath"])
+                        .Replace("/media", ConfigurationManager.AppSettings["Dexter:DocumentPath"]);
+
             var text = string.Empty;
 
             switch(System.IO.Path.GetExtension(filePath))
@@ -35,6 +37,15 @@
                     break;
                 case ".xlsx":
                     text = new XlsxToTextConverter().Convert(filePath);
+                    break;
+                case ".pptx":
+                    text = new PptxToTextConverter().Convert(filePath);
+                    break;
+                case ".ppt":
+                    text = System.IO.Path.GetFileName(filePath);
+                    break;
+                case ".zip":
+                    text = new ZipToTextConverter().Convert(filePath);
                     break;
             }
 
