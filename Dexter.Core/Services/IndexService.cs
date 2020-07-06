@@ -72,7 +72,7 @@ namespace Dexter.Core.Services
 
                 if (indexContentEvent.Cancel)
                 {
-                    indexer.Remove(indexAlias, content.GetContentType().Alias, content.Id);
+                    indexer.Remove(indexConfig.Alias, content.GetContentType().Alias, content.Id);
                 }
                 else
                 {
