@@ -1,4 +1,5 @@
-﻿using Dexter.Core.Interfaces;
+﻿using Dexter.Core.Converters;
+using Dexter.Core.Interfaces;
 using Dexter.Core.Models.Config;
 using Dexter.Core.Resolvers;
 using Dexter.Core.Services;
@@ -36,7 +37,7 @@ namespace Dexter.Core.Provider
             if (indexConfig != null)
                 return indexConfig;
 
-            indexConfig = FileSystemService.MapFile($"{DEFAULTINDEXFILEPATH}{alias}.index.json").ReadAsJson<Index>();
+            indexConfig = FileSystemService.MapFile($"{DEFAULTINDEXFILEPATH}{alias}.index.json").ReadAsJson<Index>(new ContentTypeConverter(FileSystemService, DEFAULTINDEXFILEPATH));
 
             var indexAllContentType = indexConfig.ContentTypes.FirstOrDefault(x => string.IsNullOrWhiteSpace(x.Alias));
 

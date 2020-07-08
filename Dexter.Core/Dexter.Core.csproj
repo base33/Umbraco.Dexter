@@ -212,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\DexterBackofficeApiController.cs" />
+    <Compile Include="Converters\ContentTypeConverter.cs" />
     <Compile Include="Interfaces\ICacheProvider.cs" />
     <Compile Include="Interfaces\IContentIndexStrategy.cs" />
     <Compile Include="Interfaces\IIndexableItem.cs" />

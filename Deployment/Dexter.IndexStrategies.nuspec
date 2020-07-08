@@ -13,6 +13,9 @@
     <releaseNotes>This is a release</releaseNotes>
     <dependencies>
       <dependency id="Our.Umbraco.Dexter.Core" version="(,2.0)" />
+      <dependency id="Open-XML-SDK" version="2.9.0" />
+      <dependency id="iTextSharp" version="5.5.13" />
+      <dependency id="FreeSpire.Doc" version="7.1.13" />
     </dependencies>
   </metadata>
   <files>

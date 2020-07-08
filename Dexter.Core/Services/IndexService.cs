@@ -45,8 +45,8 @@ namespace Dexter.Core.Services
                 var indexConfig = ConfigProvider.GetIndexConfig(indexAlias);
 
                 var contentTypeConfig = source == Source.Content
-                    ? indexConfig.ContentTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias)
-                    : indexConfig.MediaTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias);
+                    ? indexConfig.ContentTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias || c.Aliases.Contains(content.GetContentType().Alias))
+                    : indexConfig.MediaTypes.FirstOrDefault(c => c.Alias == content.GetContentType().Alias || c.Aliases.Contains(content.GetContentType().Alias));
 
                 if (contentTypeConfig == null)
                 {
@@ -55,25 +55,13 @@ namespace Dexter.Core.Services
                         continue;
                 }
 
-                var indexableItem = GetIndexableItem(indexConfig, contentTypeConfig, content);
-
-                switch(source)
-                {
-                    case Source.Content:
-                        indexableItem.AddOrUpdate("_umbracoSource", "content");
-                        break;
-                    case Source.Media:
-                        indexableItem.AddOrUpdate("_umbracoSource", "media");
-                        break;
-                }
-
                 var indexContentEvent = new IndexContentEvent
                 {
                     Content = content,
-                    IndexItem = indexableItem,
                     Cancel = false
                 };
-                foreach(var contentIndexStrategy in contentTypeConfig.IndexStrategies.Concat(indexConfig.IndexStrategies))
+
+                foreach (var contentIndexStrategy in contentTypeConfig.IndexStrategies.Concat(indexConfig.IndexStrategies))
                 {
                     var strategy = IndexStrategyResolver.GetContentIndexStrategy(contentIndexStrategy);
                     strategy.Execute(indexContentEvent);
@@ -82,8 +70,27 @@ namespace Dexter.Core.Services
                         break;
                 }
 
-                if (!indexContentEvent.Cancel)
+                if (indexContentEvent.Cancel)
+                {
+                    indexer.Remove(indexConfig.Alias, content.GetContentType().Alias, content.Id);
+                }
+                else
+                {
+                    var indexableItem = GetIndexableItem(indexConfig, contentTypeConfig, content);
+
+                    switch (source)
+                    {
+                        case Source.Content:
+                            indexableItem.AddOrUpdate("_umbracoSource", "content");
+                            break;
+                        case Source.Media:
+                            indexableItem.AddOrUpdate("_umbracoSource", "media");
+                            break;
+                    }
+
+                    indexContentEvent.IndexItem = indexableItem;
                     indexer.Index(indexConfig.Alias, indexableItem);
+                }
             }
         }
 
@@ -95,7 +102,8 @@ namespace Dexter.Core.Services
             
             foreach(var indexAlias in config.Indexes)
             {
-                indexer.Remove(indexAlias, content.GetContentType().Alias, content.Id);
+                var indexConfig = ConfigProvider.GetIndexConfig(indexAlias);
+                indexer.Remove(indexConfig.Alias, content.GetContentType().Alias, content.Id);
             }
         }
 
