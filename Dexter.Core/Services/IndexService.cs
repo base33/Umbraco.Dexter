@@ -55,9 +55,12 @@ namespace Dexter.Core.Services
                         continue;
                 }
 
+                var indexableItem = GetIndexableItem(indexConfig, contentTypeConfig, content);
+
                 var indexContentEvent = new IndexContentEvent
                 {
                     Content = content,
+                    IndexItem = indexableItem,
                     Cancel = false
                 };
 
@@ -76,8 +79,6 @@ namespace Dexter.Core.Services
                 }
                 else
                 {
-                    var indexableItem = GetIndexableItem(indexConfig, contentTypeConfig, content);
-
                     switch (source)
                     {
                         case Source.Content:
