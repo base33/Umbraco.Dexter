@@ -7,12 +7,15 @@ namespace Dexter.Core.Provider
     {
         public T Get<T>(string key)
         {
+            if (HttpContext.Current == null)
+                return default(T);
             return (T)HttpContext.Current.Items[key];
         }
 
         public void Set<T>(string key, T value)
         {
-            HttpContext.Current.Items[key] = value;
+            if (HttpContext.Current != null)
+                HttpContext.Current.Items[key] = value;
         }
     }
 }
