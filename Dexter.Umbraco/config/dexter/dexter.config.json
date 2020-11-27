@@ -12,7 +12,7 @@
       "type": "Dexter.ElasticSearch.ElasticIndexer"
     },
     "settings": {
-      "uri": "search-elastic-search-test-k52xmx3wtbzybjawjc74augu3i.eu-west-1.es.amazonaws.com"
+      "uri": "URL HERE"
     }
   },
 
