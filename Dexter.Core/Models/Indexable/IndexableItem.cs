@@ -10,7 +10,6 @@ namespace Dexter.Core.Models.Indexable
 {
     public class IndexableItem : IIndexableItem
     {
-        
         protected IContent Content { get; set; }
         protected Dictionary<string, object> Columns { get; set; }
         private string type = null;
@@ -18,6 +17,8 @@ namespace Dexter.Core.Models.Indexable
         public int Id { get; set; }
         public string Name { get; set; }
         public string Type { get { return !string.IsNullOrEmpty(type) ? type : "Unknown"; } set { type = value; } }
+
+        public DateTime? TimeToLive { get; set; }
 
         public IndexableItem(int id, string name, string type)
         {
@@ -50,6 +51,11 @@ namespace Dexter.Core.Models.Indexable
             {
                 { "name", Name }
             };
+
+			if (TimeToLive.HasValue)
+			{
+                item.Add("_dexter_ttl", TimeToLive.Value);
+            }
 
             return item.Concat(Columns).ToDictionary(kv => kv.Key, kv => kv.Value);
         }

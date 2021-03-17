@@ -11,6 +11,8 @@ namespace Dexter.Core.Interfaces
         int Id { get; }
         string Type { get; }
 
+        DateTime? TimeToLive { get; set; }
+
         void AddOrUpdate<T>(string key, T obj);
         void Remove(string key);
         Dictionary<string, object> ToDictionary();

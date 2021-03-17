@@ -24,12 +24,15 @@ namespace Dexter.ElasticSearch
         }
 
         public void Index(string indexName, IIndexableItem item)
-        {
-            var indexResponse = Client.Index<BytesResponse>(indexName, item.Type, item.Id.ToString(), PostData.Serializable(item.ToDictionary()));
-            var resp = Encoding.UTF8.GetString(indexResponse.Body);
-        }
+		{
+			if ((item.TimeToLive.HasValue && item.TimeToLive >= DateTime.Now) || !item.TimeToLive.HasValue)
+			{
+				var indexResponse = Client.Index<BytesResponse>(indexName, item.Type, item.Id.ToString(), PostData.Serializable(item.ToDictionary()));
+				var resp = Encoding.UTF8.GetString(indexResponse.Body);
+			}
+		}
 
-        public void Remove(string indexName, string type, int id)
+		public void Remove(string indexName, string type, int id)
         {
             var removeResponse = Client.Delete<BytesResponse>(indexName, type, id.ToString());
         }
