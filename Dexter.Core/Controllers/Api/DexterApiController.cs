@@ -81,7 +81,7 @@ namespace Dexter.Core.Controllers.Api
             });
         }
 
-        public IEnumerable<Models.Backoffice.Index> GetIndexes(string indexName = "")
+        private IEnumerable<Models.Backoffice.Index> GetIndexes(string indexName = "")
         {
             var config = ConfigProvider.GetRootConfig();
             var indexService = new IndexService(ConfigProvider);
