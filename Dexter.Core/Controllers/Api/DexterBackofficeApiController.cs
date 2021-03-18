@@ -31,44 +31,6 @@ namespace Dexter.Core.Controllers.Api
             ConfigProvider = new DexterConfigProvider(fileSystemService);
         }
 
-        private ElasticLowLevelClient LoadClient()
-        {
-            var uri = new Uri(ConfigurationManager.AppSettings["ElasticSearchConnection"]);
-            var config = new ConnectionConfiguration(uri);
-            return new ElasticLowLevelClient(config);
-        }
-
-        private string GetRangeQuery()
-		{
-            var rangeQuery = new RangeQueryWrapper();
-            rangeQuery.Query.Range.DexterTTL.Boost = 1.0;
-            rangeQuery.Query.Range.DexterTTL.Format = "yyyy-MM-dd";
-            rangeQuery.Query.Range.DexterTTL.Lt = DateTime.Now.ToString("yyyy-MM-dd");
-            var json = JsonConvert.SerializeObject(rangeQuery);
-            return json;
-        }
-
-
-        [HttpGet]
-        public void UpdateTTLDocuments()
-        {
-            var client = LoadClient();
-            var query = GetRangeQuery();
-            var indexes = GetIndexes();
-            foreach (var index in indexes)
-            {
-                var indexName = IndexResolver.GetIndexName(index.Name);
-
-                //var results = client.Search<BytesResponse>(indexName, json);
-                //var response = Encoding.UTF8.GetString(results.Body);
-
-                //do this once query is confirmed and working
-                var results = client.DeleteByQuery<BytesResponse>(indexName, query);
-                var response = Encoding.UTF8.GetString(results.Body);
-            }
-        }
-
-
         [HttpGet]
         public void Reindex(string index)
         {
