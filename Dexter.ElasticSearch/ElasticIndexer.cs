@@ -23,7 +23,7 @@ namespace Dexter.ElasticSearch
             Client = LoadClient();
         }
 
-        public void Index(string indexName, IIndexableItem item)
+        public virtual void Index(string indexName, IIndexableItem item)
 		{
 			if ((item.TimeToLive.HasValue && item.TimeToLive >= DateTime.Now) || !item.TimeToLive.HasValue)
 			{
@@ -32,17 +32,17 @@ namespace Dexter.ElasticSearch
 			}
 		}
 
-		public void Remove(string indexName, string type, int id)
+		public virtual void Remove(string indexName, string type, int id)
         {
             var removeResponse = Client.Delete<BytesResponse>(indexName, type, id.ToString());
         }
 
-        public void Clear(string indexName)
+        public virtual void Clear(string indexName)
         {
             var removeResponse = Client.IndicesDelete<BytesResponse>(indexName);
         }
 
-        public int GetNumberOfDocumentsStored(string indexName)
+        public virtual int GetNumberOfDocumentsStored(string indexName)
         {
             var response = Client.Count<DynamicResponse>(indexName, null);
 
